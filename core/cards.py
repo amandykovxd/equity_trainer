@@ -76,6 +76,16 @@ def full_deck() -> List[Card]:
     return [Card(RANK_VALUES[r], s) for r in RANK_CHARS for s in SUIT_CHARS]
 
 
+# В «короткой колоде» (шортдек) убраны все карты младше шестёрки.
+# Остаётся 36 карт: 6, 7, 8, 9, T, J, Q, K, A каждой масти.
+SHORT_DECK_MIN_RANK = 6
+
+
+def short_deck() -> List[Card]:
+    """Короткая колода из 36 карт — для шортдек-холдема."""
+    return [card for card in full_deck() if card.rank >= SHORT_DECK_MIN_RANK]
+
+
 def parse_card(text: str) -> Card:
     text = text.strip()
     if text.lower().startswith("10"):          # "10h" пишут чаще, чем "Th"
